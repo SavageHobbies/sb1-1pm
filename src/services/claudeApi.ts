@@ -1,0 +1,1 @@
+// This file will be removed as we're moving the Claude API integration to the server-side

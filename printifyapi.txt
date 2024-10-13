@@ -1,0 +1,186 @@
+Develop a web application that streamlines the process of creating product designs, generating mockups, and listing products on Printify. This application will guide users through selecting a product from Printify's catalog, uploading their custom designs, generating mockups automatically, and preparing the product listing for upload to Printify.
+Functional Requirements:
+Product Selection:
+User Prompt: Upon accessing the application, the user is asked, "What product are we designing for today?"
+Product Catalog Integration:
+Display a dropdown menu populated with the main product categories available from Printify.
+Upon selecting a main category, dynamically display submenus with specific products within that category.
+Example:
+Main Categories: T-Shirts, Mugs, Phone Cases, etc.
+Subcategories for T-Shirts: Men's Crew Neck, Women's V-Neck, Kids' T-Shirt, etc.
+User Selection: The user selects the specific product they wish to design.
+Design Upload:
+Design Availability Check:
+Prompt the user: "Do you have design files ready?"
+If Yes:
+Enable a file browsing interface for the user to locate and select their design files.
+Allow the user to navigate to a folder containing multiple design files (e.g., PSD files).
+Support bulk selection of files within the folder.
+If No:
+Optionally, provide tools or resources for the user to create designs (not mandatory for the base application).
+Mockup Template Selection:
+Mockup Presentation:
+Based on the selected product, display available mockup templates relevant to that product.
+Example:
+If the product is a T-shirt, display mockup templates of models wearing T-shirts.
+If the product is a mug, display mockup templates of mugs in various settings.
+User Selection:
+Allow the user to select up to 10 mockup templates.
+Provide previews of each template for better decision-making.
+Automated Mockup Generation:
+Process Overview: Automate the placement of user designs onto the selected mockup templates.
+Detailed Steps:
+a. Open Mockup PSD File:
+For each selected mockup template, open the corresponding PSD file.
+b. Identify Design Placement Layer:
+Analyze the PSD file to locate the layer intended for the design insertion.
+This layer is typically named "Your Design," "Place Design Here," or similar.
+Flexibility Note: Since layer names may vary, implement logic to identify layers based on attributes like layer type (e.g., Smart Object), placeholder content, or position within the layer hierarchy.
+c. Extract Layer Specifications:
+Obtain the position (coordinates), size (width and height), and any transformation settings (e.g., rotation, perspective) of the design placement layer.
+d. Place User Design:
+Insert the user's design into the identified layer.
+Scale and position the design to match the extracted specifications.
+Apply any necessary transformations to fit the mockup realistically.
+e. Modify Product Attributes (Optional):
+If applicable (e.g., changing shirt color), locate layers such as "Tshirt Color."
+Adjust color properties to reflect the desired product variation.
+f. Ensure Proper Masking and Clipping:
+Verify that the design is correctly masked or clipped to the product area, preventing it from spilling over onto unintended parts of the mockup.
+g. Preserve Original Layers:
+Keep all other layers intact, including model images, backgrounds, shadows, and any effects.
+h. Export Final Image:
+Export the edited PSD file as a high-quality image file (e.g., JPEG, PNG).
+Ensure the output image maintains clarity and resolution suitable for product listings.
+Product Title and Description Generation:
+User Input:
+Prompt the user to enter a product title and description.
+Provide guidelines or templates to assist in writing effective product descriptions.
+Automation (Optional):
+Use AI to suggest titles and descriptions based on the product type and design elements.
+Integration with Printify:
+Product Upload:
+Utilize the Printify API to upload the new product listing.
+Include the product images, title, description, and other required metadata.
+Authentication:
+Ensure secure authentication with the user's Printify account credentials.
+Handle tokens and API keys securely.
+Error Handling:
+Provide feedback to the user on the success or failure of the upload process.
+Offer options to retry or correct issues if the upload fails.
+Technical Requirements:
+Web Application Framework:
+Front-End: Develop the user interface using modern web technologies such as HTML5, CSS3, and JavaScript.
+Consider using a JavaScript framework/library like React, Vue.js, or Angular for a dynamic user experience.
+Back-End: Implement server-side logic using a language like Node.js (JavaScript), Python, or another suitable language.
+Use frameworks like Express (for Node.js) or Django/Flask (for Python) to build robust back-end services.
+File Handling and Storage:
+File Uploads:
+Use secure methods to handle file uploads from the user's browser.
+Support uploading of multiple files simultaneously.
+Storage:
+Temporarily store uploaded design files and generated mockup images on the server.
+Implement automatic cleanup routines to manage storage space.
+PSD File Manipulation:
+Libraries/Tools:
+Utilize a PSD file manipulation library capable of reading and editing PSD files programmatically.
+For Node.js:
+Use libraries like psd.js or graphicsmagick (with plugins).
+For Python:
+Use psd-tools or Pillow (with PSD support plugins).
+Capabilities Required:
+Reading layer information (names, types, positions).
+Editing layers (inserting images, modifying properties).
+Exporting the final composition as an image file.
+Printify API Integration:
+API Documentation:
+Refer to Printify's official API documentation for endpoints, parameters, and authentication methods.
+Functions Required:
+Create new product listings.
+Upload product images.
+Set product details (titles, descriptions, pricing).
+Security:
+Handle API keys and tokens securely.
+Store sensitive information in environment variables or secure configuration files.
+User Interface Design:
+Usability:
+Design an intuitive interface that guides users through each step.
+Ensure forms are easy to fill out, with clear instructions and validations.
+Responsiveness:
+Make the application accessible on various devices (desktops, tablets, mobile phones).
+Feedback Mechanisms:
+Provide progress indicators during file uploads and mockup generation.
+Display success messages upon completion of each major step.
+Error Handling and Validation:
+User Inputs:
+Validate all user inputs on both the client and server sides.
+Provide clear error messages and instructions to correct issues.
+File Integrity:
+Check uploaded files for correct formats and potential security risks.
+Process Monitoring:
+Implement try-catch blocks and error logging for debugging purposes.
+Security Considerations:
+Data Protection:
+Use HTTPS to encrypt data transmission between the client and server.
+Protect user data and files from unauthorized access.
+Input Sanitization:
+Prevent injection attacks by sanitizing all user inputs and uploaded files.
+Scalability and Performance:
+Efficient Processing:
+Optimize image processing tasks to handle multiple requests without significant delays.
+Consider asynchronous processing or queuing systems if necessary.
+Resource Management:
+Monitor server resources to prevent overloading during high usage periods.
+Implementation Notes:
+Layer Identification Flexibility:
+Since layer names in PSD files may vary, implement an intelligent method to identify the correct layer for design placement.
+Techniques may include:
+Searching for layers of type "Smart Object."
+Analyzing layer dimensions that match typical design placeholder sizes.
+Using metadata or tags if available.
+Extensibility:
+Design the system to easily incorporate additional products and mockup templates in the future.
+Utilize a modular architecture where components like product catalogs, mockup templates, and processing scripts can be updated independently.
+User Accounts (Optional):
+Implement a user authentication system if you want users to save their progress or manage multiple projects.
+Provide account management features like login, registration, and password recovery.
+Workflow Summary:
+Start Page:
+User is greeted with the question about the product they wish to design.
+Product Selection:
+User selects the product category and specific product from dropdown menus.
+Design Availability:
+User indicates whether they have designs ready.
+If yes, proceed to file upload.
+Design Upload:
+User browses and selects the folder containing their design files.
+Files are uploaded to the server.
+Mockup Template Selection:
+Application displays relevant mockup templates.
+User selects up to 10 templates.
+Mockup Generation:
+Application processes each combination of design files and mockup templates.
+Mockup images are generated automatically.
+Review Generated Mockups:
+User previews the generated mockup images.
+Option to approve or regenerate if necessary.
+Product Details:
+User inputs the product title and description.
+Assistance provided if needed (templates, suggestions).
+Upload to Printify:
+Application uses Printify API to create a new product listing.
+Includes all necessary details and images.
+Completion:
+Confirmation provided to the user.
+Option to view the product listing on Printify.
+Conclusion:
+This detailed specification outlines the requirements and functionalities of the desired web application. By following this guide, an AI coder or development team should have a clear understanding of the project's scope and be able to proceed with the implementation. The application aims to simplify and automate the process of creating product mockups and listings on Printify, saving time and effort for users.
+Optional Enhancements:
+Design Editing Tools:
+Integrate basic image editing capabilities (e.g., resizing, cropping, adding text) for users who do not have pre-made designs.
+Analytics Dashboard:
+Provide users with insights into their uploaded products, such as views, clicks, and sales data (if accessible via Printify's API).
+Multi-Language Support:
+Make the application accessible to a wider audience by supporting multiple languages.
+Tutorials and Help Sections:
+Include guides, FAQs, or walkthroughs to assist new users in navigating the application.
